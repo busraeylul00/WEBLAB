@@ -1,0 +1,195 @@
+
+    <!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS ve Liste Ödevi</title>
+<style>
+body { font-family: Arial, sans-serif; font-size: 14px; margin: 20px; }
+#sayfa { display: flex; gap: 20px; align-items: flex-start; }
+#sag { width: 640px; }
+
+/* ===== 1) YAN MENÜ ===== */
+#Bolum { margin: 0; padding: 0; width: 185px; list-style: none; border: 1px solid #b4b4b4; }
+#Bolum li { position: relative; margin: 0; padding: 0; background: #f3f3f3; border-bottom: 1px solid #ddd; }
+#Bolum a { display: block; padding: 9px 10px; color: #333; text-decoration: none; font-weight: normal; }
+#Bolum a:hover { background: #cfe8ff; }
+#Bolum ul {
+  display: none; margin: 0; padding: 0; width: 185px;
+  position: absolute; top: -1px; left: 100%; margin-left: -5px;
+  background: #ddd; border: 1px solid #b4b4b4; list-style: none; z-index: 100;
+}
+#Bolum li:hover > ul { display: block; }
+
+/* ===== 2) ÜST RESİM (JavaScript yok) ===== */
+#galeri { position: relative; margin: 0 0 25px; padding: 240px 0 0; list-style: none; }
+#galeri li { display: inline-block; margin-right: 6px; }
+#galeri .kucuk {
+  display: block; width: 62px; height: 52px; line-height: 52px; text-align: center;
+  font-size: 30px; border: 2px solid #bbb; background: #fff; cursor: pointer;
+}
+#galeri li:hover .kucuk { border-color: #1976d2; background: #e8f3ff; }
+#galeri .buyuk {
+  display: none; position: absolute; top: 0; left: 0; width: 100%; height: 230px;
+  box-sizing: border-box; padding-top: 30px; text-align: center;
+  color: #fff; font-size: 30px; font-weight: bold;
+}
+#galeri .buyuk span { display: block; font-size: 80px; margin-bottom: 6px; }
+#galeri .buyuk small {
+  display: inline-block; margin-top: 12px; padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.2); border-radius: 20px;
+  font-size: 16px; font-weight: normal;
+}
+#galeri li:first-child .buyuk { display: block; z-index: 1; }
+#galeri li:hover .buyuk { display: block; z-index: 2; }
+.r1 { background: linear-gradient(135deg, #1976d2, #0d2b6b); }
+.r2 { background: linear-gradient(135deg, #00a8a8, #045a6b); }
+.r3 { background: linear-gradient(135deg, #43a047, #1b5e20); }
+.r4 { background: linear-gradient(135deg, #7b1fa2, #311b92); }
+.r5 { background: linear-gradient(135deg, #00acc1, #006064); }
+.r6 { background: linear-gradient(135deg, #455a64, #17202a); }
+
+/* ===== 3) YAPRAK (JavaScript yok) ===== */
+#yaprak { position: relative; margin: 0; padding: 0; height: 210px; list-style: none; }
+#yaprak > li {
+  display: inline-block; height: 38px; line-height: 38px; padding: 0 12px;
+  background: #eee; border: 1px solid #ccc; cursor: pointer;
+  font-weight: bold; font-size: 13px;
+}
+#yaprak > li:hover { background: #1976d2; color: #fff; }
+#yaprak > li:first-child { background: #1976d2; color: #fff; }
+#yaprak:has(> li:hover) > li:first-child:not(:hover) { background: #eee; color: #000; }
+
+#yaprak .panel {
+  display: none; position: absolute; top: 40px; left: 0; width: 100%; height: 145px;
+  box-sizing: border-box; padding: 10px; border: 1px solid #ccc; background: #fff;
+  overflow: hidden; white-space: nowrap;
+  font-weight: normal; font-size: 14px; line-height: normal; color: #000; cursor: default;
+}
+#yaprak > li:first-child .panel { display: block; z-index: 1; }
+#yaprak:has(> li:hover) > li:first-child:not(:hover) .panel { display: none; }
+#yaprak > li:hover .panel { display: block; z-index: 2; }
+
+.urun {
+  display: inline-block; width: 190px; margin: 4px 6px 4px 0; padding: 8px;
+  vertical-align: top; box-sizing: border-box; white-space: normal;
+  border: 1px solid #ddd; text-align: center;
+}
+.urun i { display: block; font-style: normal; font-size: 34px; }
+.urun b { display: block; color: #0d47a1; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div id="sayfa">
+
+  <!-- 1) YAN MENÜ -->
+  <ul id="Bolum">
+    <li><a href="#">Spor / Outdoor</a>
+      <ul>
+        <li><a href="https://www.hepsiburada.com/ara?q=spor+ayakkabi" target="_blank">Ayakkabı</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=forma" target="_blank">Forma</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=kamp+malzemeleri" target="_blank">Kamp Malzemeleri</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Giyim / Ayakkabı</a>
+      <ul>
+        <li><a href="https://www.hepsiburada.com/ara?q=kadin+giyim" target="_blank">Kadın</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=erkek+giyim" target="_blank">Erkek</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=cocuk+giyim" target="_blank">Çocuk</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Elektronik</a>
+      <ul>
+        <li><a href="https://www.hepsiburada.com/ara?q=bilgisayar" target="_blank">Bilgisayar</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=telefon" target="_blank">Telefon</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=tablet" target="_blank">Tablet</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Kitap / Film / Müzik</a>
+      <ul>
+        <li><a href="https://www.hepsiburada.com/ara?q=kitap" target="_blank">Kitap</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=film" target="_blank">Film</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=muzik" target="_blank">Müzik</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Anne / Bebek / Oyuncak</a>
+      <ul>
+        <li><a href="https://www.hepsiburada.com/ara?q=oyuncak" target="_blank">Oyuncak</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=bebek+bakim" target="_blank">Bebek Bakım</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=bebek+arabasi" target="_blank">Bebek Arabası</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Ev / Yaşam</a>
+      <ul>
+        <li><a href="https://www.hepsiburada.com/ara?q=mobilya" target="_blank">Mobilya</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=ev+tekstili" target="_blank">Ev Tekstili</a></li>
+        <li><a href="https://www.hepsiburada.com/ara?q=mutfak" target="_blank">Mutfak</a></li>
+      </ul>
+    </li>
+    <li><a href="https://www.hepsiburada.com" target="_blank">Tüm Kategoriler</a></li>
+  </ul>
+
+  <div id="sag">
+
+    <!-- 2) ÜST RESİM -->
+    <ul id="galeri">
+      <li><span class="kucuk">🎮</span>
+        <div class="buyuk r1"><span>🎮</span>Oyun Fırsatları<br><small>Oyun Konsolu - 24.999,00 TL</small></div></li>
+      <li><span class="kucuk">📷</span>
+        <div class="buyuk r2"><span>📷</span>Kamera Fırsatları<br><small>Aksiyon Kamerası - 5.499,00 TL</small></div></li>
+      <li><span class="kucuk">🚲</span>
+        <div class="buyuk r3"><span>🚲</span>Bisiklet Fırsatları<br><small>Dağ Bisikleti - 12.999,00 TL</small></div></li>
+      <li><span class="kucuk">🎸</span>
+        <div class="buyuk r4"><span>🎸</span>Müzik Aletleri<br><small>Akustik Gitar - 3.799,00 TL</small></div></li>
+      <li><span class="kucuk">🍳</span>
+        <div class="buyuk r5"><span>🍳</span>Mutfak Fırsatları<br><small>Air Fryer - 4.199,00 TL</small></div></li>
+      <li><span class="kucuk">🎧</span>
+        <div class="buyuk r6"><span>🎧</span>Ses Sistemleri<br><small>Kablosuz Kulaklık - 1.899,00 TL</small></div></li>
+    </ul>
+
+    <!-- 3) YAPRAK -->
+    <ul id="yaprak">
+      <li>Çok Satanlar
+        <div class="panel">
+          <div class="urun"><i>🎧</i>Kablosuz Kulaklık<b>1.899,00 TL</b></div>
+          <div class="urun"><i>📷</i>Aksiyon Kamerası<b>5.499,00 TL</b></div>
+          <div class="urun"><i>🚲</i>Dağ Bisikleti<b>12.999,00 TL</b></div>
+        </div>
+      </li>
+      <li>Yeni Eklenenler
+        <div class="panel">
+          <div class="urun"><i>🎸</i>Akustik Gitar<b>3.799,00 TL</b></div>
+          <div class="urun"><i>🎮</i>Oyun Konsolu<b>24.999,00 TL</b></div>
+          <div class="urun"><i>🍳</i>Air Fryer<b>4.199,00 TL</b></div>
+        </div>
+      </li>
+      <li>Beğenilenler
+        <div class="panel">
+          <div class="urun"><i>💡</i>Akıllı Ampul<b>349,00 TL</b></div>
+          <div class="urun"><i>🧳</i>Kabin Valiz<b>2.199,00 TL</b></div>
+          <div class="urun"><i>⌚</i>Akıllı Saat<b>3.499,00 TL</b></div>
+        </div>
+      </li>
+      <li>İndirimdekiler
+        <div class="panel">
+          <div class="urun"><i>🧥</i>Kışlık Mont<b>1.499,00 TL</b></div>
+          <div class="urun"><i>👖</i>Kot Pantolon<b>899,00 TL</b></div>
+          <div class="urun"><i>🕶️</i>Güneş Gözlüğü<b>649,00 TL</b></div>
+        </div>
+      </li>
+      <li>Sınırlı Stok / Özel Fiyat
+        <div class="panel">
+          <div class="urun"><i>🤖</i>Robot Süpürge<b>7.999,00 TL</b></div>
+          <div class="urun"><i>☕</i>Kahve Makinesi<b>4.299,00 TL</b></div>
+          <div class="urun"><i>🔊</i>Bluetooth Hoparlör<b>1.299,00 TL</b></div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+</body>
+</html>
